@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\UserController;
+use App\Models\Pembimbing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +25,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     
-    Route::get('/dashboard', function () {
-        return view('pages.dashboard', ['type_menu' => 'dashboard']);
-    })->name('dashboard');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
+    Route::resource('users', UserController::class);
+    Route::resource('admins', AdminController::class);
+    Route::resource('pembimbings', PembimbingController::class);
+
 });

@@ -19,7 +19,7 @@ class PembimbingFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->name(),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
         ];

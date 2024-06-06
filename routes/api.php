@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//login Peserta
+Route::post('/login', [App\Http\Controllers\Api\PesertaController::class, 'login']);
+//login Peserta
+Route::post('/logout', [App\Http\Controllers\Api\PesertaController::class, 'logout'])->middleware('auth:sanctum');
+
+
+//login Pembimbing
+Route::post('/login-pembimbing', [App\Http\Controllers\Api\PembimbingController::class, 'login']);
+//login Pembimbing
+Route::post('/logout-pembimbing', [App\Http\Controllers\Api\PesertaController::class, 'logout'])->middleware('auth:sanctum');
