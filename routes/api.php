@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+    
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -28,3 +28,7 @@ Route::post('/logout', [App\Http\Controllers\Api\PesertaController::class, 'logo
 Route::post('/login-pembimbing', [App\Http\Controllers\Api\PembimbingController::class, 'login']);
 //login Pembimbing
 Route::post('/logout-pembimbing', [App\Http\Controllers\Api\PesertaController::class, 'logout'])->middleware('auth:sanctum');
+
+//show company
+Route::get('/company', [App\Http\Controllers\Api\CompanyController::class, 'show'])->middleware('auth:sanctum');
+
