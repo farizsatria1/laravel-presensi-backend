@@ -39,4 +39,25 @@ class PesertaController extends Controller
 
         return response(['message' => 'Logged Out'], 200);
     }
+
+    //update image profile
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $user = $request->user();
+        $image = $request->file('image');
+
+        //save image
+        $image->storeAs('public/images', $image->hashName());
+        $user->image = $image->hashName();
+        $user->save();
+
+        return response([
+            'message' => 'Profile updated',
+            'user' => $user,
+        ], 200);
+    }
 }

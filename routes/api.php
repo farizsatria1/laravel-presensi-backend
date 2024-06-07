@@ -32,3 +32,14 @@ Route::post('/logout-pembimbing', [App\Http\Controllers\Api\PesertaController::c
 //show company
 Route::get('/company', [App\Http\Controllers\Api\CompanyController::class, 'show'])->middleware('auth:sanctum');
 
+//checkin
+Route::post('/checkin', [App\Http\Controllers\Api\AttendanceController::class, 'checkin'])->middleware('auth:sanctum');
+
+//checkout
+Route::post('/checkout', [App\Http\Controllers\Api\AttendanceController::class, 'checkout'])->middleware('auth:sanctum');
+
+//is checked in
+Route::get('/is-checkin', [App\Http\Controllers\Api\AttendanceController::class, 'isCheckedin'])->middleware('auth:sanctum');
+
+//update profile peserta
+Route::post('/update-profile', [App\Http\Controllers\Api\PesertaController::class, 'updateProfile'])->middleware('auth:sanctum');

@@ -23,5 +23,9 @@
             <li class="nav-item">
                 <a href="{{ route('pembimbings.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Pembimbing</span></a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ route('attendances.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Presensi</span></a>
+            </li>
     </aside>
 </div>
