@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Pembimbing;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DashboardController extends Controller
 {
@@ -49,6 +50,7 @@ class DashboardController extends Controller
             'time_out' => $request->time_out,
         ]);
 
-        return redirect()->route('company.show', 1)->with('success', 'Company updated successfully');
+        Alert::success('Sukses', 'Perusahaan berhasil di Update');
+        return redirect()->route('companies.index', 1);
     }
 }

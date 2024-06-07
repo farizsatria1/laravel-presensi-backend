@@ -7,6 +7,7 @@ use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\UserController;
 use App\Models\Pembimbing;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('admins', AdminController::class);
     Route::resource('pembimbings', PembimbingController::class);
+    Route::resource('companies', DashboardController::class);
 
 });
