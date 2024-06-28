@@ -27,7 +27,7 @@ class User extends Authenticatable
         'image'
     ];
 
-    public function pembimbings(){
+    public function pembimbing(){
         return $this->belongsTo(Pembimbing::class);
     }
 

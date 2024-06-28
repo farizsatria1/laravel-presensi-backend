@@ -25,7 +25,7 @@
     function logout() {
         Swal.fire({
             title: 'Apakah Anda yakin?',
-            text: "Anda akan keluar dari sistem!",
+            text: "Anda akan keluar dari Website!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

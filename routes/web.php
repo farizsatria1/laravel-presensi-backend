@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Models\Attendance;
 use App\Models\Pembimbing;
@@ -34,5 +35,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pembimbings', PembimbingController::class);
     Route::resource('companies', DashboardController::class);
     Route::resource('attendances', AttendanceController::class);
-
+    Route::resource('permissions', PermissionController::class);
 });

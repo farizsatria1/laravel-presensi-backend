@@ -13,19 +13,23 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('admins.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Admin</span></a>
+                <a href="{{ route('admins.index') }}" class="nav-link"><i class="fas fa-user"></i> <span>Admin</span></a>
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Peserta</span></a>
+                <a href="{{ route('users.index') }}" class="nav-link"><i class="fas fa-user"></i> <span>Peserta</span></a>
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('pembimbings.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Pembimbing</span></a>
+                <a href="{{ route('pembimbings.index') }}" class="nav-link"><i class="fas fa-user"></i> <span>Pembimbing</span></a>
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('attendances.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Presensi</span></a>
+                <a href="{{ route('attendances.index') }}" class="nav-link"><i class="fas fa-bell"></i> <span>Presensi</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('permissions.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Permission</span></a>
             </li>
     </aside>
 </div>

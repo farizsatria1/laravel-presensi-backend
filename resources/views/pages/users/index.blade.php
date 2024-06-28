@@ -25,11 +25,6 @@
 
             </div>
             <h2 class="section-title">Peserta</h2>
-            <p class="section-lead">
-                You can manage all Peserta, such as editing, deleting and more.
-            </p>
-
-
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
@@ -54,21 +49,25 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Created At</th>
                                         <th>Asal Sekolah</th>
+                                        <th>Pembimbing</th>
+                                        <th>Profile</th>
                                         <th>Action</th>
                                     </tr>
-                                     @foreach ($users as $user)
+                                    @foreach ($users as $user)
                                     <tr>
-                                    <td>{{ $users->firstItem() + $loop->index }}</td>
+                                        <td>{{ $users->firstItem() + $loop->index }}</td>
                                         <td>{{ $user->name }}
                                         </td>
                                         <td>
                                             {{ $user->email }}
                                         </td>
-                                        <td>{{ $user->created_at }}</td>
+                                        <td>{{ $user->sekolah ?? '-' }}</td>
                                         <td>
-                                            {{ $user->sekolah }}
+                                            {{ $user->pembimbing ? $user->pembimbing->name : 'Tidak ada pembimbing' }}
+                                        </td>
+                                        <td>
+                                            <img class="mb-2 mt-2" src="{{ asset('storage/images/' . $user->image) }}" alt="{{ $user->name }}" width="100">
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content">

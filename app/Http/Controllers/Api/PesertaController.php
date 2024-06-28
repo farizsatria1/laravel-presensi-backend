@@ -16,7 +16,11 @@ class PesertaController extends Controller
             'password'=>'required',
         ]);
 
-        $user = User::where('email', $loginData['email'])->first();
+        $user = User::where('role', 'peserta')
+        ->with(['pembimbing' => function ($query) {
+            $query->select('id', 'name');
+        }])
+        ->where('email', $loginData['email'])->first();
 
         //check user
         if(!$user){
@@ -29,6 +33,7 @@ class PesertaController extends Controller
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
+       
 
         return response(['user' => $user, 'token' => $token],200);
     }

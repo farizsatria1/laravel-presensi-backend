@@ -27,13 +27,13 @@
         <div class="section-body">
             <h2 class="section-title">Peserta</h2>
             <div class="card">
-                <form action="{{ route('users.store') }}" method="POST">
+                <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <!-- Nama -->
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control @error('name')
+                            <input placeholder="Masukkan Nama" type="text" class="form-control @error('name')
                                 is-invalid
                             @enderror" name="name">
                             @error('name')
@@ -52,7 +52,7 @@
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                 </div>
-                                <input type="email" class="form-control @error('email')
+                                <input placeholder="Masukkan Email" type="email" class="form-control @error('email')
                                 is-invalid
                             @enderror" name="email">
                                 @error('email')
@@ -72,7 +72,7 @@
                                         <i class="fas fa-lock"></i>
                                     </div>
                                 </div>
-                                <input type="password" class="form-control @error('password')
+                                <input placeholder="Masukkan Password" type="password" class="form-control @error('password')
                                 is-invalid
                             @enderror" name="password">
                             </div>
@@ -92,7 +92,7 @@
                                         <i class="fas fa-university"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control @error('sekolah')
+                                <input placeholder="Asal Sekolah" type="text" class="form-control @error('sekolah')
                                 is-invalid
                             @enderror" name="sekolah">
                             </div>
@@ -121,6 +121,18 @@
                             @enderror
                         </div>
 
+                        <!-- Gambar -->
+                        <div class="form-group">
+                            <label for="image">Gambar Profile</label>
+                            <input type="file" class="form-control-file @error('image') is-invalid @enderror mb-3" id="image" name="image" onchange="previewImage();">
+                            @error('image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <img id="preview" src="{{ asset('img/img-default.jpg') }}" alt="your image" width="200" />
+                        </div>
+
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>
@@ -132,6 +144,14 @@
     </section>
 </div>
 @endsection
-
+<script>
+    function previewImage() {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+        }
+        reader.readAsDataURL(document.getElementById('image').files[0]);
+    }
+</script>
 @push('scripts')
 @endpush

@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text"
+                                <input placeholder="Masukkan Nama" type="text"
                                     class="form-control @error('name')
                                 is-invalid
                             @enderror"
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email"
+                                <input placeholder="Masukkan Email" type="email"
                                     class="form-control @error('email')
                                 is-invalid
                             @enderror"
@@ -64,7 +64,7 @@
                                             <i class="fas fa-lock"></i>
                                         </div>
                                     </div>
-                                    <input type="password"
+                                    <input placeholder="Masukkan Password" type="password"
                                         class="form-control @error('password')
                                 is-invalid
                             @enderror"

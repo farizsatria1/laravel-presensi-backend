@@ -18,7 +18,7 @@ class PembimbingController extends Controller
 
         $pembimbing = Pembimbing::where('email', $loginData['email'])->first();
 
-        //check user
+        //check pembimbing
         if(!$pembimbing){
             return response(['message' => 'Invalid credentials'], 401);
         }
@@ -30,13 +30,12 @@ class PembimbingController extends Controller
 
         $token = $pembimbing->createToken('auth_token')->plainTextToken;
 
-        return response(['user' => $pembimbing, 'token' => $token],200);
+        return response(['pembimbing' => $pembimbing, 'token' => $token],200);
     }
 
     //logout
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
-
         return response(['message' => 'Logged Out'], 200);
     }
 }
