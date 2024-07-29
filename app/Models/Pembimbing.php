@@ -14,6 +14,7 @@ class Pembimbing extends Model
         'email',
         'name',
         'password',
+        'image'
     ];
 
     protected $hidden = [

@@ -50,6 +50,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Created At</th>
+                                        <th>Profile</th>
                                         <th>Action</th>
                                     </tr>
                                      @foreach ($pembimbings as $pembimbing)
@@ -61,6 +62,9 @@
                                             {{ $pembimbing->email }}
                                         </td>
                                         <td>{{ $pembimbing->created_at }}</td>
+                                        <td>
+                                            <img class="mb-2 mt-2" src="{{ asset('storage/images/' . $pembimbing->image) }}" alt="{{ $pembimbing->name }}" width="100">
+                                        </td>
                                         <td>
                                             <div class="d-flex justify-content">
                                                 <a href='{{ route('pembimbings.edit', $pembimbing->id) }}' class="btn btn-sm btn-info btn-icon">

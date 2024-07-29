@@ -10,36 +10,38 @@ use Illuminate\Support\Facades\Hash;
 class PesertaController extends Controller
 {
     //login
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $loginData = $request->validate([
-            'email'=>'required|email',
-            'password'=>'required',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $user = User::where('role', 'peserta')
-        ->with(['pembimbing' => function ($query) {
-            $query->select('id', 'name');
-        }])
-        ->where('email', $loginData['email'])->first();
+            ->with(['pembimbing' => function ($query) {
+                $query->select('id', 'name');
+            }])
+            ->where('email', $loginData['email'])->first();
 
         //check user
-        if(!$user){
+        if (!$user) {
             return response(['message' => 'Invalid credentials'], 401);
         }
 
         //check password
-        if(!Hash::check($loginData['password'], $user->password)){
+        if (!Hash::check($loginData['password'], $user->password)) {
             return response(['message' => 'Invalid credentials'], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-       
 
-        return response(['user' => $user, 'token' => $token],200);
+
+        return response(['user' => $user, 'token' => $token], 200);
     }
 
     //logout
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
 
         return response(['message' => 'Logged Out'], 200);
@@ -64,5 +66,24 @@ class PesertaController extends Controller
             'message' => 'Profile updated',
             'user' => $user,
         ], 200);
+    }
+
+    //get peserta sesuai dengan pembimbing
+    public function show(Request $request)
+    {
+        $currentUser = $request->user();
+
+        $peserta = User::where('pembimbing_id', $currentUser->id)->get();
+        return response(['peserta' => $peserta], 200);
+    }
+
+    //get peserta kecuali yang sedang login
+    public function getPeserta(Request $request)
+    {
+        $currentUser = $request->user();
+
+        // Mengambil semua peserta kecuali yang sedang login
+        $peserta = User::where('id', '!=', $currentUser->id)->get();
+        return response(['peserta' => $peserta], 200);
     }
 }

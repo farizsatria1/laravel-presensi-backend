@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('address_in')->nullable();
             //address_out
             $table->string('address_out')->nullable();
+            //status presensi
+            $table->string('status');
             $table->timestamps();
         });
     }

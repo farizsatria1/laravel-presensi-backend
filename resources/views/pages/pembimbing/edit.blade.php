@@ -30,7 +30,7 @@
 
 
             <div class="card">
-                <form action="{{ route('pembimbings.update', $pembimbing) }}" method="POST">
+                <form action="{{ route('pembimbings.update', $pembimbing) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -74,6 +74,19 @@
                             </div>
                             @enderror
                         </div>
+
+                        <!-- Gambar -->
+                        <div class="form-group">
+                            <label for="image">Gambar Profile</label>
+                            <input type="file" class="form-control-file @error('image') is-invalid @enderror mb-3" id="image" name="image" onchange="previewImage();">
+                            @error('image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <img id="preview" src="{{ $pembimbing->image ? asset('storage/images/' . $pembimbing->image) :  asset('img/img-default.jpg') }}" alt="your image" width="200" />
+                        </div>
+
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">Submit</button>
@@ -85,6 +98,14 @@
     </section>
 </div>
 @endsection
-
+<script>
+    function previewImage() {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+        }
+        reader.readAsDataURL(document.getElementById('image').files[0]);
+    }
+</script>
 @push('scripts')
 @endpush

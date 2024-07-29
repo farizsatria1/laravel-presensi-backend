@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -32,4 +33,18 @@ class PermissionController extends Controller
 
         return response()->json(['message' => 'Permission created successfully'], 201);
     }
+
+    public function show(Request $request)
+    {
+        $currentUser = $request->user();
+
+        $permission = Permission::where('user_id', $currentUser->id)->get();
+        return response(['permission' => $permission], 200);
+    }
+
+    public function index($user_id){
+        $permission = Permission::where('user_id',$user_id)->get();
+        return response(['permission' => $permission], 200);
+    }
+
 }

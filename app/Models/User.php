@@ -27,9 +27,21 @@ class User extends Authenticatable
         'image'
     ];
 
-    public function pembimbing(){
+    public function pembimbing()
+    {
         return $this->belongsTo(Pembimbing::class);
     }
+    
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
+
+    public function progress()
+    {
+        return $this->hasMany(Progress::class);
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

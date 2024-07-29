@@ -38,4 +38,10 @@ class PembimbingController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response(['message' => 'Logged Out'], 200);
     }
+
+    //index
+    public function index() {
+        $pembimbing = Pembimbing::get();
+        return response(['pembimbing' => $pembimbing], 200);
+    }
 }
