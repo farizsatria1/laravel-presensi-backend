@@ -83,7 +83,7 @@ class PesertaController extends Controller
         $currentUser = $request->user();
 
         // Mengambil semua peserta kecuali yang sedang login
-        $peserta = User::where('id', '!=', $currentUser->id)->get();
+        $peserta = User::where('id', '!=', $currentUser->id)->where('role','peserta')->get();
         return response(['peserta' => $peserta], 200);
     }
 }

@@ -16,11 +16,13 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('trainer_pembimbing')->nullable()->constrained('pembimbings')->onDelete('cascade');
             $table->foreignId('trainer_peserta')->nullable()->constrained('pembimbings')->onDelete('cascade');
+            $table->date('date');
             $table->string('judul');
             $table->text('isi');
             $table->string('image')->nullable();
             $table->enum('peserta_approve',['0','1'])->default('0');
             $table->enum('pembimbing_approve',['0','1'])->default('0');
+            $table->enum('status',['0','1','2','3'])->default('2');
             $table->timestamps();
         });
     }

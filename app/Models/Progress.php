@@ -12,18 +12,24 @@ class Progress extends Model
         'user_id',
         'trainer_pembimbing',
         'trainer_peserta',
+        'date',
         'judul',
         'isi',
         'image',
         'peserta_approve',
-        'pembimbing_approve'
+        'pembimbing_approve',
+        'status'
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function pembimbing(){
-        return $this->belongsTo(Pembimbing::class);
+    public function trainerPembimbing(){
+        return $this->belongsTo(Pembimbing::class, 'trainer_pembimbing');
+    }
+
+    public function trainerPeserta(){
+        return $this->belongsTo(User::class, 'trainer_peserta');
     }
 }

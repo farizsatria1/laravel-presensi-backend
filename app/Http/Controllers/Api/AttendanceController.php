@@ -24,7 +24,7 @@ class AttendanceController extends Controller
         //save new attendance
         $attendance = new Attendance;
         $attendance->user_id = $request->user()->id;
-        $attendance->date = date('Y-m-d');
+        $attendance->date = date('Y-m-d'); 
         $attendance->time_in = $currentTime;
         $attendance->latlon_in = $request->latitude . ',' . $request->longitude;
         $attendance->address_in = $request->address_in;

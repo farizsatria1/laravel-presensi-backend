@@ -79,3 +79,33 @@ Route::get('/api-get-pembimbing', [App\Http\Controllers\Api\PembimbingController
 
 //get peserta kecuali yang login
 Route::get('/api-get-peserta-for-progress',[App\Http\Controllers\Api\PesertaController::class, 'getPeserta'])->middleware('auth:sanctum');
+
+//get progress hari ini by user_id
+Route::get('/api-get-progress', [App\Http\Controllers\Api\ProgressController::class, 'getProgress'])->middleware('auth:sanctum');
+
+//get progress yang ditolak by user_id
+Route::get('/api-get-progress-ditolak', [App\Http\Controllers\Api\ProgressController::class, 'getProgressDitolak'])->middleware('auth:sanctum');
+
+//get progress revisi by user_id
+Route::get('/api-get-progress-revisi', [App\Http\Controllers\Api\ProgressController::class, 'getProgressRevisi'])->middleware('auth:sanctum');
+
+//get progress revisi by pembimbing_id
+Route::get('/api-get-progress-revisi-pembimbing', [App\Http\Controllers\Api\ProgressController::class, 'getProgressRevisiPembimbing'])->middleware('auth:sanctum');
+
+//get progress recap by user_id
+Route::get('/api-get-progress-recap', [App\Http\Controllers\Api\ProgressController::class, 'getProgressRecap'])->middleware('auth:sanctum');
+
+//update progress/revisi
+Route::post('/api-update-progress/{id}', [App\Http\Controllers\Api\ProgressController::class, 'updateProgress'])->middleware('auth:sanctum');
+
+//update peserta approve
+Route::post('/api-update-progress-peserta-approve/{id}', [App\Http\Controllers\Api\ProgressController::class, 'updatePesertaApprove'])->middleware('auth:sanctum');
+
+//update pembimbing approve
+Route::post('/api-update-progress-pembimbing-approve/{id}', [App\Http\Controllers\Api\ProgressController::class, 'updatePembimbingApprove'])->middleware('auth:sanctum');
+
+//get progress for peserta approve
+Route::get('/api-get-progress-peserta-approve', [App\Http\Controllers\Api\ProgressController::class, 'getProgressPesertaApprove'])->middleware('auth:sanctum');
+
+//get progress for pembimbing approve
+Route::get('/api-get-progress-pembimbing-approve', [App\Http\Controllers\Api\ProgressController::class, 'getProgressPembimbingApprove'])->middleware('auth:sanctum');
