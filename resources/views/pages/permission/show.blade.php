@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Permission Detail')
+@section('title', 'Detail Izin')
 
 @push('style')
 <!-- CSS Libraries -->
@@ -12,14 +12,14 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Permission Detail</h1>
+            <h1>Detail Izin</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
-                <div class="breadcrumb-item">Permission Detail</div>
+                <div class="breadcrumb-item">Detail Izin</div>
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Permission Detail</h2>
+            <h2 class="section-title">Detail Izin</h2>
             <p class="section-lead">
                 Informasi tentang detail izin Peserta.
             </p>
@@ -46,11 +46,11 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6 col-12">
-                                    <label>Date Permission</label>
+                                    <label>Tanggal Izin</label>
                                     <p>{{ $permission->date_permission }}</p>
                                 </div>
                                 <div class="form-group col-md-6 col-12">
-                                    <label>Reason</label>
+                                    <label>Alasan</label>
                                     <p>{{ $permission->reason }}</p>
                                 </div>
                             </div>
@@ -68,12 +68,14 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6 col-12">
-                                    <label>Status Permission</label>
+                                    <label>Status Izin</label>
                                     <p>
                                         @if ($permission->is_approved == 1)
-                                        Approved
+                                        <div class="badge badge-success">Disetujui</div>
+                                        @elseif ($permission->is_approved == 2)
+                                        <div class="badge badge-warning">Pending</div>
                                         @else
-                                        Not Approved
+                                        <div class="badge badge-danger">Ditolak</div>
                                         @endif
                                     </p>
                                 </div>
@@ -81,8 +83,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-primary">Edit
-                                Permission For Approve</a>
+                            <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-primary">Edit Status Izin</a>
                         </div>
                     </div>
                 </div>

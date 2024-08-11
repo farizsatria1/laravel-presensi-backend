@@ -18,6 +18,7 @@ class PesertaController extends Controller
         ]);
 
         $user = User::where('role', 'peserta')
+            ->where('status', 'aktif')
             ->with(['pembimbing' => function ($query) {
                 $query->select('id', 'name');
             }])
@@ -73,7 +74,9 @@ class PesertaController extends Controller
     {
         $currentUser = $request->user();
 
-        $peserta = User::where('pembimbing_id', $currentUser->id)->get();
+        $peserta = User::where('pembimbing_id', $currentUser->id)
+            ->where('status', 'aktif')
+            ->get();
         return response(['peserta' => $peserta], 200);
     }
 
@@ -83,7 +86,22 @@ class PesertaController extends Controller
         $currentUser = $request->user();
 
         // Mengambil semua peserta kecuali yang sedang login
-        $peserta = User::where('id', '!=', $currentUser->id)->where('role','peserta')->get();
+        $peserta = User::where('id', '!=', $currentUser->id)
+        ->where('status', 'aktif')
+        ->where('role', 'peserta')->get();
         return response(['peserta' => $peserta], 200);
+    }
+
+    //get profile peserta
+    public function getProfilePeserta(Request $request)
+    {
+        $userId = $request->input('id');
+
+        $user = User::where('id', $userId)->get();
+
+        return response([
+            'message' => 'success',
+            'user' => $user
+        ], 200);
     }
 }

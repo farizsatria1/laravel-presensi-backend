@@ -241,7 +241,7 @@ class ProgressController extends Controller
             ->with(['user' => function ($query) {
                 $query->select('id', 'name');
             }])
-            ->where('peserta_approve', '0')
+            ->whereIn('status', ['2', '3'])
             ->get();
 
         $progress->each(function ($item) {
@@ -268,8 +268,7 @@ class ProgressController extends Controller
             ->with(['user' => function ($query) {
                 $query->select('id', 'name');
             }])
-            ->where('pembimbing_approve', '0')
-            ->where('peserta_approve', '1')
+            ->where('status', '2')
             ->get();
 
         $progress->each(function ($item) {

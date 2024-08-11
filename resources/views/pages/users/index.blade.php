@@ -13,7 +13,7 @@
         <div class="section-header">
             <h1>Peserta</h1>
             <div class="section-header-button">
-                <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah Peserta</a>
             </div>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
@@ -33,7 +33,7 @@
                             <div class="float-right">
                                 <form method="GET" action="{{ route('users.index') }}">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="name">
+                                        <input type="text" class="form-control" placeholder="Cari" name="name">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -47,12 +47,13 @@
                                 <table class="table-striped table">
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Email</th>
                                         <th>Asal Sekolah</th>
                                         <th>Pembimbing</th>
-                                        <th>Profile</th>
-                                        <th>Action</th>
+                                        <th>Status</th>
+                                        <th>Profil</th>
+                                        <th>Aksi</th>
                                     </tr>
                                     @foreach ($users as $user)
                                     <tr>
@@ -66,6 +67,7 @@
                                         <td>
                                             {{ $user->pembimbing ? $user->pembimbing->name : 'Tidak ada pembimbing' }}
                                         </td>
+                                        <td>{{ $user->status=='aktif' ? 'Aktif' : 'Tidak Aktif' }}</td>
                                         <td>
                                             <img class="mb-2 mt-2" src="{{ asset('storage/images/' . $user->image) }}" alt="{{ $user->name }}" width="100">
                                         </td>

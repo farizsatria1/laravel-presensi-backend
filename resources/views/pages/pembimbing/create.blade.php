@@ -16,11 +16,11 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Add Pembimbing</h1>
+            <h1>Tambah Pembimbing</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="{{ route('pembimbings.index') }}">Pembimbing</a></div>
-                <div class="breadcrumb-item">Create</div>
+                <div class="breadcrumb-item">Buat</div>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

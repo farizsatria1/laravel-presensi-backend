@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('peserta');
             $table->string('sekolah')->nullable();
+            $table->string('divisi')->nullable();
+            $table->string('tgl_mulai')->nullable();
+            $table->enum('status',['aktif','non-aktif'])->default('aktif');
             $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();

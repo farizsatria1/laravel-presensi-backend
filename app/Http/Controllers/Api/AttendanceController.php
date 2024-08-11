@@ -24,7 +24,7 @@ class AttendanceController extends Controller
         //save new attendance
         $attendance = new Attendance;
         $attendance->user_id = $request->user()->id;
-        $attendance->date = date('Y-m-d'); 
+        $attendance->date = date('Y-m-d');
         $attendance->time_in = $currentTime;
         $attendance->latlon_in = $request->latitude . ',' . $request->longitude;
         $attendance->address_in = $request->address_in;
@@ -115,22 +115,31 @@ class AttendanceController extends Controller
         $pembimbingId = $currentUser->id;
         $today = now()->toDateString();
 
-        $attendance = Attendance::with('user:id,name')
+        $attendance = Attendance::with('user:id,name,image,sekolah')
             ->whereHas('user', function ($query) use ($pembimbingId) {
-                $query->where('pembimbing_id', $pembimbingId);
+                $query->where('pembimbing_id', $pembimbingId)
+                    ->where('status', 'aktif'); // Tambahkan kondisi status aktif di sini
             })
             ->where('date', $today)
             ->where('status', 0)
             ->get();
 
-        // Mengambil hanya nama pengguna dari hasil query
-        $userNames = $attendance->pluck('user.name');
+        // Mengambil id, name, dan image pengguna dari hasil query
+        $userDetails = $attendance->map(function ($att) {
+            return [
+                'id' => $att->user->id,
+                'name' => $att->user->name,
+                'image' => $att->user->image,
+                'sekolah' => $att->user->sekolah
+            ];
+        });
 
         return response([
             'message' => 'sukses',
-            'data' => $userNames
+            'data' => $userDetails
         ], 200);
     }
+
 
 
     //mendapatkan nama peserta yang belum mengambil presensi hari ini
@@ -144,14 +153,16 @@ class AttendanceController extends Controller
         $absentUserIds = Attendance::where('date', $today)
             ->where('status', 0)
             ->whereHas('user', function ($query) use ($pembimbingId) {
-                $query->where('pembimbing_id', $pembimbingId);
+                $query->where('pembimbing_id', $pembimbingId)
+                    ->where('status', 'aktif');;
             })
             ->pluck('user_id');
 
         // Dapatkan data pengguna yang tidak melakukan absen hari ini
         $usersNotAbsentToday = User::where('pembimbing_id', $pembimbingId)
+            ->where('status', 'aktif')
             ->whereNotIn('id', $absentUserIds)
-            ->get(['id', 'name']);
+            ->get();
 
         return response([
             'message' => 'sukses',
@@ -159,7 +170,39 @@ class AttendanceController extends Controller
         ], 200);
     }
 
-    //index
+    //mendapatkan nama peserta yang sudah mengambil presensi hari ini tepat waktu
+    public function isAbsentToday(Request $request)
+    {
+        $currentUser = $request->user();
+        $pembimbingId = $currentUser->id;
+        $today = now()->toDateString();
+
+        $attendance = Attendance::with('user:id,name,image,sekolah')
+            ->whereHas('user', function ($query) use ($pembimbingId) {
+                $query->where('pembimbing_id', $pembimbingId)
+                    ->where('status', 'aktif');;
+            })
+            ->where('date', $today)
+            ->where('status', 1)
+            ->get();
+
+        $userDetails = $attendance->map(function ($att) {
+            return [
+                'id' => $att->user->id,
+                'name' => $att->user->name,
+                'image' => $att->user->image,
+                'sekolah' => $att->user->sekolah,
+            ];
+        });
+
+        return response([
+            'message' => 'sukses',
+            'data' => $userDetails
+        ], 200);
+    }
+
+
+    //mendapatkan presensi berdasarkan id
     public function getAttendanceById(Request $request, $user_id)
     {
         $date = $request->input('date');

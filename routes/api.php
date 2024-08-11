@@ -32,6 +32,9 @@ Route::post('/logout-pembimbing', [App\Http\Controllers\Api\PembimbingController
 //show company
 Route::get('/company', [App\Http\Controllers\Api\CompanyController::class, 'show'])->middleware('auth:sanctum');
 
+//get Profile Peserta
+Route::get('/api-get-profile-peserta', [App\Http\Controllers\Api\PesertaController::class, 'getProfilePeserta'])->middleware('auth:sanctum');
+
 //checkin
 Route::post('/checkin', [App\Http\Controllers\Api\AttendanceController::class, 'checkin'])->middleware('auth:sanctum');
 
@@ -64,6 +67,9 @@ Route::get('/api-late-attendances', [App\Http\Controllers\Api\AttendanceControll
 
 //get not attendance
 Route::get('/api-not-attendances', [App\Http\Controllers\Api\AttendanceController::class, 'notAbsentToday'])->middleware('auth:sanctum');
+
+//get not attendance
+Route::get('/api-get-attendances-ontime', [App\Http\Controllers\Api\AttendanceController::class, 'isAbsentToday'])->middleware('auth:sanctum');
 
 //get not attendance today
 Route::get('/api-not-attendances', [App\Http\Controllers\Api\AttendanceController::class, 'notAbsentToday'])->middleware('auth:sanctum');

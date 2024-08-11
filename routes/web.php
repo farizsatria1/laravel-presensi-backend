@@ -6,9 +6,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\UserController;
 use App\Models\Attendance;
 use App\Models\Pembimbing;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -36,4 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('companies', DashboardController::class);
     Route::resource('attendances', AttendanceController::class);
     Route::resource('permissions', PermissionController::class);
+    Route::resource('progress', ProgressController::class);
 });
+
+Route::get('/cetak-progress/{userId}', [ProgressController::class, 'cetakProgress'])->name('progress.cetak-progress');
+Route::get('/cetak-presensi/{userId}', [AttendanceController::class, 'cetakPresensi'])->name('presensi.cetak-presensi');
+Route::get('/cetak-izin/{userId}', [PermissionController::class, 'cetakPermission'])->name('presensi.cetak-izin');

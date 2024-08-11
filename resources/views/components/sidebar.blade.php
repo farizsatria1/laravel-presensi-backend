@@ -3,9 +3,6 @@
         <div class="sidebar-brand">
             <a href="index.html">Admin Lauwba</a>
         </div>
-        <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
-        </div>
         <ul class="sidebar-menu">
 
             <li class="nav-item">
@@ -29,7 +26,11 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('permissions.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Permission</span></a>
+                <a href="{{ route('progress.index') }}" class="nav-link"><i class="fas fa-file"></i> <span>Progress</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('permissions.index') }}" class="nav-link"><i class="fas fa-columns"></i> <span>Izin</span></a>
             </li>
     </aside>
 </div>

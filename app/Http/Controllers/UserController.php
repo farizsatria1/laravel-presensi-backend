@@ -38,6 +38,9 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
+            'tgl_mulai' => 'required',
+            'status' => 'required',
+            'divisi' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -54,6 +57,9 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'sekolah' => $request->sekolah,
+            'tgl_mulai' => $request->tgl_mulai,
+            'status' => $request->status,
+            'divisi' => $request->divisi,
             'pembimbing_id' => $request->pembimbing_id,
             'image' => $imageName, // Menyimpan nama file gambar ke database
         ]);
@@ -97,6 +103,9 @@ class UserController extends Controller
             'email' => $request->email,
             'sekolah' => $request->sekolah,
             'pembimbing_id' => $request->pembimbing_id,
+            'tgl_mulai' => $request->tgl_mulai,
+            'status' => $request->status,
+            'divisi' => $request->divisi,
             'image' => $imageName,
         ]);
 

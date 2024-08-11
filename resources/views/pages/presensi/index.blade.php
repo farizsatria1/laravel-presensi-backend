@@ -22,15 +22,12 @@
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>All Posts</h4>
-                        </div>
                         <div class="card-body">
 
                             <div class="float-right">
                                 <form method="GET" action="{{ route('attendances.index') }}">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search by name" name="name">
+                                        <input type="text" class="form-control" placeholder="Cari berdasarkan nama" name="name">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -43,14 +40,13 @@
                             <div class="table-responsive">
                                 <table class="table-striped table">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Date</th>
-                                        <th>Time In</th>
-                                        <th>Time Out</th>
-                                        <th>Latlong In</th>
-                                        <th>Latlong Out</th>
-
-                                        <th>Action</th>
+                                        <th>Nama</th>
+                                        <th>Tanggal</th>
+                                        <th>Waktu Masuk</th>
+                                        <th>Waktu Pulang</th>
+                                        <th>Latlong Masuk</th>
+                                        <th>Latlong Pulang</th>
+                                        <th>Status</th>
                                     </tr>
                                     @foreach ($attendances as $attendance)
                                     <tr>
@@ -72,22 +68,12 @@
                                         <td>
                                             {{ $attendance->latlon_out }}
                                         </td>
-
                                         <td>
-                                            <div class="d-flex">
-                                                <a href='{{ route('attendances.edit', $attendance->id) }}' class="btn btn-sm btn-info btn-icon">
-                                                    <i class="fas fa-edit"></i>
-                                                    Edit
-                                                </a>
-
-                                                <form action="{{ route('attendances.destroy', $attendance->id) }}" method="POST" class="ml-2">
-                                                    <input type="hidden" name="_method" value="DELETE" />
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                    <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                        <i class="fas fa-times"></i> Delete
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            @if ($attendance->status == 1)
+                                            <div class="badge badge-success">Tepat Waktu</div>
+                                            @else
+                                            <div class="badge badge-danger">Terlambat</div>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

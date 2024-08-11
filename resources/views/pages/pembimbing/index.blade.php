@@ -13,7 +13,7 @@
         <div class="section-header">
             <h1>Pembimbing</h1>
             <div class="section-header-button">
-                <a href="{{ route('pembimbings.create') }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('pembimbings.create') }}" class="btn btn-primary">Tambah Pembimbing</a>
             </div>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
@@ -33,7 +33,7 @@
                             <div class="float-right">
                                 <form method="GET" action="{{ route('pembimbings.index') }}">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="name">
+                                        <input type="text" class="form-control" placeholder="Cari" name="name">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>
@@ -47,11 +47,11 @@
                                 <table class="table-striped table">
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Created At</th>
-                                        <th>Profile</th>
-                                        <th>Action</th>
+                                        <th>Tanggal Dibuat</th>
+                                        <th>Profil</th>
+                                        <th>Aksi</th>
                                     </tr>
                                      @foreach ($pembimbings as $pembimbing)
                                     <tr>

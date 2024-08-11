@@ -45,4 +45,21 @@ class PermissionController extends Controller
         Alert::success('Sukses', 'Permission berhasil di Update');
         return redirect()->route('permissions.index');
     }
+
+    public function cetakPermission($userId)
+    {
+        // Ambil data permission berdasarkan user ID
+        $permission = Permission::where('user_id', $userId)
+            ->with('user') // pastikan untuk load relationship user
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Jika data permission kosong, kembalikan dengan pesan error
+        if ($permission->isEmpty()) {
+            return view('pages.cetak.notfound.404-izin');
+        }
+
+        // Kembalikan view dengan data permission
+        return view('pages.cetak.cetak-izin', compact('permission'));
+    }
 }

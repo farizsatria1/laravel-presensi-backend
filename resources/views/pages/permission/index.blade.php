@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Permissions')
+@section('title', 'Izin')
 
 @push('style')
 <!-- CSS Libraries -->
@@ -11,29 +11,26 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Permissions</h1>
+            <h1>Izin</h1>
             {{-- <div class="section-header-button">
                     <a href="{{ route('permissions.create') }}" class="btn btn-primary">Add New</a>
         </div> --}}
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
-            <div class="breadcrumb-item">Permission</div>
+            <div class="breadcrumb-item">Izin</div>
         </div>
 </div>
 <div class="section-body">
-    <h2 class="section-title">Permissions</h2>
+    <h2 class="section-title">Izin</h2>
     <div class="row mt-4">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h4>All Permissions</h4>
-                </div>
                 <div class="card-body">
 
                     <div class="float-right">
                         <form method="GET" action="{{ route('permissions.index') }}">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search by name" name="name">
+                                <input type="text" class="form-control" placeholder="Cari berdasarkan nama" name="name">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
@@ -47,11 +44,10 @@
                         <table class="table-striped table">
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
-                                <th>Date Permission</th>
-                                <th>Status Permission</th>
-
-                                <th>Action</th>
+                                <th>Nama</th>
+                                <th>Tanggal Izin</th>
+                                <th>Status Izin</th>
+                                <th>Aksi</th>
                             </tr>
                             @foreach ($permissions as $permission)
                             <tr>
@@ -63,19 +59,21 @@
                                 </td>
                                 <td>
                                     @if ($permission->is_approved == 1)
-                                    <div class="badge badge-success">Approved</div>
+                                    <div class="badge badge-success">Disetujui</div>
                                     @elseif ($permission->is_approved == 2)
                                     <div class="badge badge-warning">Pending</div>
                                     @else
-                                    <div class="badge badge-danger">Not Approved</div>
+                                    <div class="badge badge-danger">Ditolak</div>
                                     @endif
                                 </td>
                                 <td>
                                     <div class="d-flex">
+                                        @if ($permission->is_approved == 0 || $permission->is_approved == 2)
                                         <a href='{{ route('permissions.show', $permission->id) }}' class="btn btn-sm btn-info btn-icon">
                                             <i class="fas fa-edit"></i>
                                             Detail
                                         </a>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

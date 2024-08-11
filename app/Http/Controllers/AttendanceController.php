@@ -17,4 +17,21 @@ class AttendanceController extends Controller
             })->orderBy('id', 'desc')->paginate(10);
         return view('pages.presensi.index', compact('attendances'));
     }
+
+    public function cetakPresensi($userId)
+    {
+        // Ambil data presensi berdasarkan user ID
+        $presensi = Attendance::where('user_id', $userId)
+            ->with('user') // pastikan untuk load relationship user
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Jika data presensi kosong, kembalikan dengan pesan error
+        if ($presensi->isEmpty()) {
+            return view('pages.cetak.notfound.404-presensi');
+        }
+
+        // Kembalikan view dengan data presensi
+        return view('pages.cetak.cetak-presensi', compact('presensi'));
+    }
 }

@@ -104,6 +104,26 @@
                             </div>
                         </div>
 
+                        <!-- Tanggal Mulai -->
+                        <div class="form-group">
+                            <label>Tanggal Mulai</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-calendar-week"></i>
+                                    </div>
+                                </div>
+                                <input placeholder="Tanggal Mulai" type="date" class="form-control @error('tgl_mulai')
+                                is-invalid
+                            @enderror" name="tgl_mulai" value="{{ old('tgl_mulai', $user->tgl_mulai) }}">
+                            </div>
+                            @error('tgl_mulai')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
                         <!-- Pembimbing -->
                         <div class="form-group">
                             <label for="participant">Nama Pembimbing:</label>
@@ -122,6 +142,43 @@
                             @enderror
                         </div>
 
+                        <!-- status -->
+                        <div class="form-group">
+                            <label for="participant">Status:</label>
+                            <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                <option value="aktif" {{ old('status', $user->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="non-aktif" {{ old('status', $user->status) == 'non-aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                            </select>
+                            @error('status')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <!-- Divisi -->
+                        <div class="form-group">
+                                <label class="form-label">Divisi</label>
+                                <div class="selectgroup w-100">
+                                    <label class="selectgroup-item">
+                                        <input type="radio" name="divisi" value="web" class="selectgroup-input"
+                                            @if ($user->divisi == 'web') checked @endif>
+                                        <span class="selectgroup-button">Web</span>
+                                    </label>
+                                    <label class="selectgroup-item">
+                                        <input type="radio" name="divisi" value="mobile" class="selectgroup-input"
+                                            @if ($user->divisi == 'mobile') checked @endif>
+                                        <span class="selectgroup-button">Mobile</span>
+                                    </label>
+                                    <label class="selectgroup-item">
+                                        <input type="radio" name="divisi" value="multimedia" class="selectgroup-input"
+                                            @if ($user->divisi == 'multimedia') checked @endif>
+                                        <span class="selectgroup-button">Multimedia</span>
+                                    </label>
+
+                                </div>
+                            </div>
+
                         <!-- Gambar -->
                         <div class="form-group">
                             <label for="image">Gambar Profile</label>
@@ -136,7 +193,7 @@
 
                     </div>
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

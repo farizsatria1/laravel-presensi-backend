@@ -24,6 +24,9 @@ class User extends Authenticatable
         'password',
         'role',
         'sekolah',
+        'divisi',
+        'tgl_mulai',
+        'status',
         'image'
     ];
 

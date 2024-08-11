@@ -16,11 +16,11 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Add Peserta</h1>
+            <h1>Tambah Peserta</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="{{ route('users.index') }}">Peserta</a></div>
-                <div class="breadcrumb-item">Create</div>
+                <div class="breadcrumb-item">Buat</div>
             </div>
         </div>
 
@@ -103,6 +103,26 @@
                             @enderror
                         </div>
 
+                        <!-- Tanggal Mulai -->
+                        <div class="form-group">
+                            <label>Tanggal Mulai</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-calendar-week"></i>
+                                    </div>
+                                </div>
+                                <input placeholder="Tanggal Mulai" type="date" class="form-control @error('tgl_mulai')
+                                is-invalid
+                            @enderror" name="tgl_mulai">
+                            </div>
+                            @error('tgl_mulai')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
                         <!-- Pembimbing -->
                         <div class="form-group">
                             <label for="participant">Nama Pembimbing:</label>
@@ -121,6 +141,39 @@
                             @enderror
                         </div>
 
+                        <!-- Status -->
+                        <div class="form-group">
+                            <label for="participant">Status:</label>
+                            <select class="form-control" name="status">
+                                <option value="aktif">Aktif</option>
+                                <option value="non-aktif">Tidak Aktif</option>
+                            </select>
+                            @error('status')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <!-- Divisi -->
+                        <div class="form-group">
+                            <label class="form-label">Divisi</label>
+                            <div class="selectgroup w-100">
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="divisi" value="web" class="selectgroup-input" checked="">
+                                    <span class="selectgroup-button">Web</span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="divisi" value="mobile" class="selectgroup-input">
+                                    <span class="selectgroup-button">Mobile</span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="divisi" value="multimedia" class="selectgroup-input">
+                                    <span class="selectgroup-button">Multimedia</span>
+                                </label>
+                            </div>
+                        </div>
+
                         <!-- Gambar -->
                         <div class="form-group">
                             <label for="image">Gambar Profile</label>
@@ -135,7 +188,7 @@
 
                     </div>
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

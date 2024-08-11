@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Fariz Satria',
             'email' => 'fariz@example.com',
             'password' => Hash::make('12345678'),
+            'divisi' => 'mobile',
+            'tgl_mulai' => '2024-04-01',
+            'status' => 'aktif',
             'role' => 'admin'
         ]);
 
@@ -40,9 +43,9 @@ class DatabaseSeeder extends Seeder
             'time_out' => '17:00',
         ]);
 
-        $this->call([
+        // $this->call([
 
-            PermissionSeeder::class
-        ]);
+        //     PermissionSeeder::class
+        // ]);
     }
 }
