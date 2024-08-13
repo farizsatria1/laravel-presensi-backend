@@ -73,6 +73,7 @@
                     <th style="text-align: center;">No</th>
                     <th style="text-align: center;">Tanggal</th>
                     <th style="text-align: center;">Alasan</th>
+                    <th style="text-align: center;">Status Izin</th>
                     <th style="text-align: center;">Bukti Dukung</th>
                 </tr>
             </thead>
@@ -100,6 +101,15 @@
                         @endphp
                         <td>{{ $item->reason }}</td>
                         <td>
+                            @if($item->is_approved == 0)
+                            Ditolak
+                            @elseif($item->is_approved == 1)
+                            Disetujui
+                            @else
+                            Pending
+                            @endif
+                        </td>
+                        <td>
                             @if ($item->image)
                             <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ asset('storage/permissions/' . $item->image) }}" alt="Gambar tidak tersedia" width="60" style="display: block; margin: 0 auto;">
                             @else
@@ -110,6 +120,10 @@
                 @endforeach
             </tbody>
         </table>
+        <div>
+            <p>Izin Disetujui : {{ $permission->where('is_approved', 1)->count() }} </p>
+            <p>Izin Ditolak   : {{ $permission->where('is_approved', 0)->count() }} </p>
+        </div>
     </div>
 
     <script>

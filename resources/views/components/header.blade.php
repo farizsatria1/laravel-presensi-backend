@@ -17,7 +17,7 @@
                 <a href="#" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); logout()">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                     @csrf
                 </form>
             </div>

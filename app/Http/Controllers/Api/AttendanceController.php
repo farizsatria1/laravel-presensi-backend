@@ -115,7 +115,7 @@ class AttendanceController extends Controller
         $pembimbingId = $currentUser->id;
         $today = now()->toDateString();
 
-        $attendance = Attendance::with('user:id,name,image,sekolah')
+        $attendance = Attendance::with('user:id,name,image,sekolah,tgl_mulai,divisi')
             ->whereHas('user', function ($query) use ($pembimbingId) {
                 $query->where('pembimbing_id', $pembimbingId)
                     ->where('status', 'aktif'); // Tambahkan kondisi status aktif di sini
@@ -130,7 +130,9 @@ class AttendanceController extends Controller
                 'id' => $att->user->id,
                 'name' => $att->user->name,
                 'image' => $att->user->image,
-                'sekolah' => $att->user->sekolah
+                'sekolah' => $att->user->sekolah,
+                'tgl_mulai' => $att->user->tgl_mulai,
+                'divisi' => $att->user->divisi,
             ];
         });
 
@@ -151,7 +153,6 @@ class AttendanceController extends Controller
 
         // Dapatkan user_ids yang telah melakukan absen hari ini
         $absentUserIds = Attendance::where('date', $today)
-            ->where('status', 0)
             ->whereHas('user', function ($query) use ($pembimbingId) {
                 $query->where('pembimbing_id', $pembimbingId)
                     ->where('status', 'aktif');;
@@ -177,7 +178,7 @@ class AttendanceController extends Controller
         $pembimbingId = $currentUser->id;
         $today = now()->toDateString();
 
-        $attendance = Attendance::with('user:id,name,image,sekolah')
+        $attendance = Attendance::with('user:id,name,image,sekolah,tgl_mulai,divisi')
             ->whereHas('user', function ($query) use ($pembimbingId) {
                 $query->where('pembimbing_id', $pembimbingId)
                     ->where('status', 'aktif');;
@@ -192,6 +193,8 @@ class AttendanceController extends Controller
                 'name' => $att->user->name,
                 'image' => $att->user->image,
                 'sekolah' => $att->user->sekolah,
+                'tgl_mulai' => $att->user->tgl_mulai,
+                'divisi' => $att->user->divisi,
             ];
         });
 

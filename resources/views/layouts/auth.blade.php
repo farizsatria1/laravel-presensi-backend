@@ -52,8 +52,6 @@
                         <!-- Content -->
                         @yield('main')
 
-                        <!-- Footer -->
-                        @include('components.auth-footer')
                     </div>
                 </div>
             </div>

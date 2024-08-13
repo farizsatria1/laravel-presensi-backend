@@ -53,11 +53,10 @@
                                     <tbody>
                                         @forelse ($progresses as $progress)
                                         <tr>
-                                            <td>{{ $progress->date }}</td>
-                                            <td>{{ $progress->user->name }}</td>
+                                            <td>{{ $progress->user ? $progress->user->name : 'User tidak ditemukan' }}</td>
                                             <td>{{ $progress->judul }}</td>
                                             <td>{{ $progress->isi }}</td>
-                                            <td>{{ $progress->trainer_pembimbing == null ? $progress->trainerPeserta->name : $progress->trainerPembimbing->name }}</td>
+                                            <td>{{ $progress->trainer_pembimbing ? $progress->trainerPembimbing->name : ($progress->trainerPeserta ? $progress->trainerPeserta->name : 'Trainer tidak ditemukan') }}</td>
                                             <td>
                                                 @if($progress->status == 0)
                                                 <div class="badge badge-danger">Ditolak</div>
