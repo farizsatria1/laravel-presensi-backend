@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(20)->create();
-
         \App\Models\User::factory()->create([
             'name' => 'Fariz Satria',
             'email' => 'fariz@example.com',
@@ -23,12 +21,6 @@ class DatabaseSeeder extends Seeder
             'tgl_mulai' => '2024-04-01',
             'status' => 'aktif',
             'role' => 'admin'
-        ]);
-
-        \App\Models\Pembimbing::factory()->create([
-            'name' => 'Satria Refandino',
-            'email' => 'fariz@gmail.com',
-            'password' => Hash::make('12345678'),
         ]);
 
         //data dummy for company
