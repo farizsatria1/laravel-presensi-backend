@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('trainer_pembimbing')->nullable()->constrained('pembimbings')->onDelete('cascade');
-            $table->foreignId('trainer_peserta')->nullable()->constrained('pembimbings')->onDelete('cascade');
+            $table->foreignId('trainer_peserta')->nullable()->constrained('users')->onDelete('cascade');
             $table->date('date');
             $table->string('judul');
             $table->text('isi');

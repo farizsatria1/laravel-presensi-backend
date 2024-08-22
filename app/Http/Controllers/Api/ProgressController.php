@@ -14,8 +14,6 @@ class ProgressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'trainer_peserta' => 'nullable|exists:users,id',
-            'trainer_pembimbing' => 'nullable|exists:pembimbings,id',
             'judul' => 'required',
             'isi' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -141,35 +139,30 @@ class ProgressController extends Controller
     public function getProgressRecap(Request $request)
     {
         $date = $request->input('date');
-        $userId = $request->input('id');
-        $currentUser = $request->user();
+        $userId = $request->input('id') ?: $request->user()->id;
 
-        // Gunakan user_id yang diberikan jika ada, jika tidak gunakan id user saat ini
-        $query = Progress::with(['trainerPembimbing', 'trainerPeserta'])->where('user_id', $userId ? $userId : $currentUser->id);
+        // Mengambil progress berdasarkan user_id dan tanggal jika diberikan
+        $query = Progress::with(['trainerPembimbing', 'trainerPeserta'])->where('user_id', $userId);
 
         if ($date) {
-            $query->where('date', $date);
+            $query->whereDate('date', $date);
         }
 
         $progress = $query->get();
 
+        // Memproses hasil progress
         $progress->each(function ($item) {
-            if ($item->trainerPeserta) {
-                $item->trainer_name = $item->trainerPeserta->name;
-            } elseif ($item->trainerPembimbing) {
-                $item->trainer_name = $item->trainerPembimbing->name;
-            } else {
-                $item->trainer_name = null;
-            }
-            unset($item->trainerPeserta);
-            unset($item->trainerPembimbing);
+            $trainerName = $item->trainerPeserta->name ?? $item->trainerPembimbing->name ?? null;
+            $item->setAttribute('trainer_name', $trainerName);
+            unset($item->trainerPeserta, $item->trainerPembimbing);
         });
 
-        return response([
+        return response()->json([
             'message' => 'success',
-            'progress' => $progress
+            'progress' => $progress,
         ], 200);
     }
+
 
     //update progress
     public function updateProgress(Request $request, $id)

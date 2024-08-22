@@ -53,6 +53,7 @@
                                     <tbody>
                                         @forelse ($progresses as $progress)
                                         <tr>
+                                            <td>{{ $progress->date }}</td>
                                             <td>{{ $progress->user ? $progress->user->name : 'User tidak ditemukan' }}</td>
                                             <td>{{ $progress->judul }}</td>
                                             <td>{{ $progress->isi }}</td>
