@@ -49,6 +49,11 @@
                     tabindex="4">
                     Login
                 </button>
+                <button type="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                    tabindex="4">
+                    Keluar
+                </button>
             </div>
         </form>
     </div>
