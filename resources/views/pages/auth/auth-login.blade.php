@@ -50,6 +50,14 @@
                     Login
                 </button>
             </div>
+
+            <div class="form-group">
+                <button type="submit"
+                    class="btn btn-primary btn-lg btn-block"
+                    tabindex="4">
+                    Login
+                </button>
+            </div>
         </form>
     </div>
 </div>
